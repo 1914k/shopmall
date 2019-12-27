@@ -18,7 +18,7 @@
       return {
         // result: null,
         banner: [],
-        
+        recommend: []
       }
     },
     created(){
@@ -27,7 +27,10 @@
         console.log(res);
         // this.result = res;
         // console.log(this.result);  
-
+        this.banner = res.data.banner;
+        this.recommend = res.data.recommend;
+        console.log(this.banner);
+        console.log(this.recommend);
       })
         // console.log(this.result); 这里打印的是空，因为 getHomeMultidata() 是异步操作
 

@@ -55,14 +55,14 @@ export default {
   methods: {
     // 定时操作
     startTimer: function () {
-    setInterval(() => {
+      this.playTimer = setInterval(() => {
         this.currentIndex++;
         console.log(this.slideCount);
         this.scrollContent(-this.currentIndex * this.totalWidth);
       },this.interval)
     },
     stopTimer: function () {
-      clearInterval(this.startTimer);
+      clearInterval(this.playTimer);
     },
     // 滚动到正确的位置
     scrollContent: function (currentPosition) {

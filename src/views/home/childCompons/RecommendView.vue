@@ -21,7 +21,7 @@
       }
     },
     created(){
-      console.log(this.recommend.length);
+      console.log(this.recommend);
       // this.getWidth();
     },
     computed: {

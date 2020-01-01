@@ -57,7 +57,7 @@ export default {
     startTimer: function () {
       this.playTimer = setInterval(() => {
         this.currentIndex++;
-        console.log(this.slideCount);
+        // console.log(this.slideCount);
         this.scrollContent(-this.currentIndex * this.totalWidth);
       },this.interval)
     },

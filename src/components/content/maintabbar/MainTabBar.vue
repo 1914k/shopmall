@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="tabbar">
     <tab-bar>  
       <tab-bar-item path="home">
         <img slot="item-icon" src="@/assets/img/tabbar/home.png" alt="">
@@ -39,4 +39,7 @@
 </script>
 
 <style>
+  #tabbar {
+    height: 49px;
+  }
 </style>

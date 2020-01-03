@@ -41,5 +41,6 @@
 <style>
   #tabbar {
     height: 49px;
+    z-index: 9999;
   }
 </style>

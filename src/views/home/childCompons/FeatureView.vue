@@ -1,7 +1,7 @@
 <template>
   <div class="feature">
-    <!-- <div class="teature-title">
-      <h2>{{featuretitle}}</h2>
+    <div class="teature-title">
+      <h3>{{featuretitle}}</h3>
     </div>
     <a href="#">
       <div class="feature-body">
@@ -12,10 +12,10 @@
           <p>{{item.title}}</p>  
         </div>
       </div>
-    </a>   -->
-    <a href="">
+    </a>  
+    <!-- <a href="">
       <img src="@/assets/img/home/featureview/recommend.png" alt="">
-    </a>
+    </a> -->
   </div>
 </template>
 
@@ -56,7 +56,7 @@
       }
     },
     created(){
-      console.log(this.popular)
+      // console.log(this.popular)
     }
   }
 </script>
@@ -77,6 +77,7 @@
     flex-wrap: wrap;
     line-height: 30px;
     font-size: 12px;
+    font-weight: bolder;
   }
   .feature-body-item {
     width: 25vw;
@@ -85,13 +86,13 @@
     margin-top: 8px;
   }
   .feature-body-item .img {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     margin:auto;
     overflow: hidden;
   }
   .feature-body-item img {
-    width: 80px;
+    width: 90px;
     /* height: 80px; */
   }
 </style>

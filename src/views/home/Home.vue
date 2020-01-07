@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
-    <scroll class="content" ref="scroll">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true" @pullingUp="loadMore">
       <home-swiper :banner="banner"/>
       <recommend-view :recommend="recommend"/>
       <feature-view/>
@@ -10,7 +10,7 @@
         @tabClick="changeType"/>
       <goods-list :goods="goods[type].list"/>
     </scroll>
-    <back-top @click.native="backClick"/> <!-- 组件要监听原生事件要添加 .native -->
+    <back-top @click.native="backClick" v-if="isShow"/> <!-- 组件要监听原生事件要添加 .native -->
   </div>
 </template>
 
@@ -39,20 +39,37 @@
           'news': {page: 0, list: []},
           'sell': {page: 0, list: []}
         },
-        type: "pop"
+        type: "pop",
+        isShow: false
       }
     },
     created() {
       //1. 拿到多个数据
       this.getHomeMultidata();
-        // console.log(this.result); 这里打印的是空，因为 getHomeMultidata() 是异步操作
+      // console.log(this.result); 这里打印的是空，因为 getHomeMultidata() 是异步操作
       // 2.请求商品数据
       this.getHomeGoods();
       // this.getHomeGoods('news')
       // this.getHomeGoods('sell')
     },
+    mounted() {
+      // 3监听图片加载完成
+      const refresh = this.debounce(this.$refs.scroll.refresh);
+      this.$bus.$on('itemImageLoad', () => {
+        refresh();
+      })
+    },
     methods: {
       // 事件监听相关的****************
+      debounce(func, delay) {
+        let timer = null;
+        return function (...args) {
+          if(timer) clearTimeout(timer)
+          timer = setTimeout(() => {
+            func.apply(this, args)
+          },delay)
+        }
+      }, 
       changeType(index) {
         // console.log(index);  
         let type = ["pop", "news", "sell"];
@@ -75,6 +92,19 @@
         // 调用 Scroll 组件里的 methods 里的 scrollTo 方法
          this.$refs.scroll.scrollTo(0,0);
       },
+      contentScroll(position) {
+        this.isShow = position.y < -1000 ? true : false
+      },
+      loadMore() {
+        console.log('加载更多');
+        if(this.goods.pop.list.length >= 100){
+          console.log('停');
+          return
+        }
+        this.getHomeGoods()
+        console.log(this.goods.pop);
+        // this.$refs.scroll.finishPullUp()
+      },
       // 网络请求相关的****************
       getHomeMultidata() {
         getHomeMultidata().then(res => {
@@ -95,7 +125,7 @@
         this.goods.sell.list.push(...res.sell.list);
         // this.goods.type.page++
         // console.log(this.goods);
-        
+        this.$refs.scroll.finishPullUp()
         // res.data.list
         })
       }
@@ -117,6 +147,7 @@
   #home {
     /* padding-top: 44px; */
     height: 100vh;
+    margin-bottom: -49px;
     position: relative;
   }
   .home-nav {

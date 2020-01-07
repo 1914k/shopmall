@@ -38,7 +38,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   #tabbar {
     height: 49px;
     z-index: 9999;

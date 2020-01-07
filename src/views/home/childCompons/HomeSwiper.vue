@@ -23,6 +23,10 @@
         }
       }
     },
+    beforeUpdate() {
+      // console.log(this.banner);
+      this.banner[2].image ="https://s10.mogucdn.com/mlcdn/c45406/180926_45fkj8ifdj4l824l42dgf9hd0h495_750x390.jpg";
+    },
     components: {
       Swiper,
       SwiperItem

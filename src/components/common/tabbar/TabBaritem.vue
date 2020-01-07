@@ -13,7 +13,7 @@
 			path: String,
 			activeColor: {
 				type :String,
-				default: "#ff4080c2"
+				default: "pink"
 			}
 		},
 		data() {
@@ -31,6 +31,7 @@
 				return this.$route.path.indexOf(this.path) === 1;
 			},
 			activeStyle(){
+				// console.log(this.activeColor);
 				return this.isActive ? {color: this.activeColor} : {}
 			}
 		},

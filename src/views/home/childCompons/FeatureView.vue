@@ -88,6 +88,7 @@
   .feature-body-item .img {
     width: 90px;
     height: 90px;
+    border-radius: 50%;
     margin:auto;
     overflow: hidden;
   }

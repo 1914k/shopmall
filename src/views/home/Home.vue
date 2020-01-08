@@ -5,9 +5,9 @@
       <home-swiper :banner="banner"/>
       <recommend-view :recommend="recommend"/>
       <feature-view/>
-      <tab-control class="tab-control" 
-        :titles="['流行','新款','精选']" 
-        @tabClick="changeType"/>
+      <tab-control :titles="['流行','新款','精选']" 
+        @tabClick="changeType"
+        ref="tabControl" />
       <goods-list :goods="goods[type].list"/>
     </scroll>
     <back-top @click.native="backClick" v-if="isShow"/> <!-- 组件要监听原生事件要添加 .native -->
@@ -27,7 +27,7 @@
   import BackTop from 'components/content/backTop/BackTop'
 // 方法 额外数据
   import { getHomeMultidata, getHomeGoods } from 'network/home'
-  
+  import { debounce } from 'common/utils'
   export default {
     name: 'Home',
     data() {
@@ -53,23 +53,15 @@
       // this.getHomeGoods('sell')
     },
     mounted() {
-      // 3监听图片加载完成
-      const refresh = this.debounce(this.$refs.scroll.refresh);
+      // 3. 监听图片加载完成
+      const refresh = debounce(this.$refs.scroll.refresh);
       this.$bus.$on('itemImageLoad', () => {
         refresh();
       })
+      console.log(this.$refs.tabControl.$el.offsetTop);
     },
     methods: {
-      // 事件监听相关的****************
-      debounce(func, delay) {
-        let timer = null;
-        return function (...args) {
-          if(timer) clearTimeout(timer)
-          timer = setTimeout(() => {
-            func.apply(this, args)
-          },delay)
-        }
-      }, 
+      // 事件监听相关的**************** 
       changeType(index) {
         // console.log(index);  
         let type = ["pop", "news", "sell"];
@@ -159,11 +151,6 @@
     left: 0;
     right: 0;
     top: 0;
-  }
-  .tab-control {
-    position: sticky;
-    top: 44px;
-    z-index: 9;
   }
   .content {
     position: absolute;

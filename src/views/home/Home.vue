@@ -47,8 +47,18 @@
         type: "pop",
         isShow: false,
         tabOffsetTop: 0,
-        isTabShow: false
+        isTabShow: false,
+        saveY: 0
       }
+    },
+    activated() {
+      // console.log('活跃');
+      this.$refs.scroll.scrollTo(0,this.saveY);
+      this.$refs.scroll.refresh();
+    },
+    deactivated() {
+      // console.log('不活跃');
+      this.saveY = this.$refs.scroll.getScrollY();
     },
     created() {
       //1. 拿到多个数据
@@ -103,6 +113,7 @@
         this.isShow = position.y < -1000 ? true : false;
         // 决定 tabControl 是否吸顶
         this.isTabShow = -position.y > this.tabOffsetTop;
+        this.saveY = position.y;
       },
       loadMore() {
         console.log('加载更多');

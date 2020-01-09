@@ -1,13 +1,18 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <tab-control :titles="['流行','新款','精选']" 
+        @tabClick="changeType"
+        ref="tabControl2"
+        class="tabControl"
+        v-show="isTabShow"/>
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true" @pullingUp="loadMore">
-      <home-swiper :banner="banner"/>
+      <home-swiper :banner="banner" @swiperImageLoad="swiperImageLoad"/>
       <recommend-view :recommend="recommend"/>
       <feature-view/>
       <tab-control :titles="['流行','新款','精选']" 
         @tabClick="changeType"
-        ref="tabControl" />
+        ref="tabControl1"/>
       <goods-list :goods="goods[type].list"/>
     </scroll>
     <back-top @click.native="backClick" v-if="isShow"/> <!-- 组件要监听原生事件要添加 .native -->
@@ -40,7 +45,9 @@
           'sell': {page: 0, list: []}
         },
         type: "pop",
-        isShow: false
+        isShow: false,
+        tabOffsetTop: 0,
+        isTabShow: false
       }
     },
     created() {
@@ -58,7 +65,12 @@
       this.$bus.$on('itemImageLoad', () => {
         refresh();
       })
-      console.log(this.$refs.tabControl.$el.offsetTop);
+      // console.log(this.$refs.tabControl);
+      // 获取 tabOffsetTop 的值的 方法一 延时输出
+      // setTimeout(() => {
+      //   this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+      //   console.log(this.tabOffsetTop);
+      // },500);
     },
     methods: {
       // 事件监听相关的**************** 
@@ -66,6 +78,8 @@
         // console.log(index);  
         let type = ["pop", "news", "sell"];
         this.type = type[index];
+        this.$refs.tabControl1.currentIndex = index;
+        this.$refs.tabControl2.currentIndex = index;
        /*  switch (index) {
           case 0:
             this.type = "pop";
@@ -85,7 +99,10 @@
          this.$refs.scroll.scrollTo(0,0);
       },
       contentScroll(position) {
-        this.isShow = position.y < -1000 ? true : false
+        // 判断 backTop 是否显示
+        this.isShow = position.y < -1000 ? true : false;
+        // 决定 tabControl 是否吸顶
+        this.isTabShow = -position.y > this.tabOffsetTop;
       },
       loadMore() {
         console.log('加载更多');
@@ -96,6 +113,11 @@
         this.getHomeGoods()
         console.log(this.goods.pop);
         // this.$refs.scroll.finishPullUp()
+      },
+      // 获取 tabOffsetTop 的值的 方法二 监听图片加载完成
+      swiperImageLoad() {
+        console.log(this.$refs.tabControl1.$el.offsetTop);
+        this.tabOffsetTop = this.$refs.tabControl1.$el.offsetTop;
       },
       // 网络请求相关的****************
       getHomeMultidata() {
@@ -137,7 +159,6 @@
 
 <style scoped>
   #home {
-    /* padding-top: 44px; */
     height: 100vh;
     margin-bottom: -49px;
     position: relative;
@@ -146,11 +167,11 @@
     background-color: var(--color-tint);
     color: #fff;
 
-    position: fixed;
+    /* position: fixed;
     z-index: 9;
     left: 0;
     right: 0;
-    top: 0;
+    top: 0; */
   }
   .content {
     position: absolute;
@@ -164,4 +185,8 @@
     overflow: hidden;
     margin-top: 44px;
   } */
+  .tabControl{
+    position: relative;
+    z-index: 99;
+  }
 </style>

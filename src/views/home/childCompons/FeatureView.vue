@@ -86,14 +86,14 @@
     margin-top: 8px;
   }
   .feature-body-item .img {
-    width: 90px;
-    height: 90px;
+    width: 24vw;
+    height: 24vw;
     border-radius: 50%;
     margin:auto;
     overflow: hidden;
   }
   .feature-body-item img {
-    width: 90px;
+    width: 24vw;
     /* height: 80px; */
   }
 </style>

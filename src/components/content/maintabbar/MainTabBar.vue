@@ -41,6 +41,6 @@
 <style scoped>
   #tabbar {
     height: 49px;
-    z-index: 99;
+    z-index: 8;
   }
 </style>

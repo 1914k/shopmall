@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-list-item" @click="itemClick">
+  <div class="goods-list-item" :style="{width: getWidth1}" @click="itemClick">
       <img :src="goodsitem.image" alt="" @load="imageLoad">
       <div class="goods-list-info">
         <p clas="title">{{goodsitem.title}}</p>
@@ -18,7 +18,8 @@
         default() {
           return {}
         }
-      }
+      },
+      width: null
     },
     methods: {
       imageLoad() {
@@ -27,6 +28,18 @@
       },
       itemClick() {
         this.$router.push('/detail/' + this.goodsitem.id)
+      },
+      //在 methods 里调用的话要在第二行 getWidth 后加一个括号 ()
+      getWidth() {
+        let width = this.width + "%";
+        // console.log(this.width)  
+        return width
+      }
+    },
+    computed: {
+      getWidth1() {
+        let width = this.width + "%";
+        return width
       }
     },
     created() {

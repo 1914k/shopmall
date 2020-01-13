@@ -48,15 +48,12 @@
           </div>
         </div>
       </div>
-      <ul>
-        <li v-for="i in 40" :key="i">{{i}}</li>
-      </ul>
   </div>
 </template>
 
 <script>
   export default{
-    name: 'DetailGoodsInfo',
+    name: 'DetailGoods',
     props: {
       goods: {
         type: Object,
@@ -71,9 +68,9 @@
       }
     },
     created(){
-      console.log(this.goods);
+      // console.log(this.goods);
       setTimeout(() => {
-        console.log(this.goods);
+        // console.log(this.goods);
       }, 50);
     },
     methods: {
@@ -160,6 +157,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 10;
   }
   .all-content-mask {
     position: absolute;

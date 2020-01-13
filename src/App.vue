@@ -20,5 +20,5 @@ export default {
 
 <style>
   @import "./assets/css/base.css";
-
+  @import "./assets/iconfont/iconfont.css"
 </style> 

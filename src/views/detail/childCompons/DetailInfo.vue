@@ -42,7 +42,7 @@
       }
     },
     mounted() {
-      console.log(this.detailInfo);
+      // console.log(this.detailInfo);
       
     },
     components: {

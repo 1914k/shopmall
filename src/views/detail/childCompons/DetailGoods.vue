@@ -88,7 +88,7 @@
   .base-info {
     position: relative;
     font-size: 14px;
-    margin: 10px 8px 8px 8px;
+    margin: 10px 8px 0 8px;
   }
   .info-title {
     margin-top: 10px;

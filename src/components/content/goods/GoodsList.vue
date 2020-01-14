@@ -1,7 +1,7 @@
 <template>
   <div class="goods">
     <goods-list-item v-for="(item, index) in goods" 
-    :key="index" :goodsitem="item"/>
+    :key="index" :width="width" :goodsitem="item"/>
   </div>
 </template>
 
@@ -16,7 +16,8 @@
         default() {
           return []
         }
-      }
+      },
+      width: null
     },
     components: {
       GoodsListItem

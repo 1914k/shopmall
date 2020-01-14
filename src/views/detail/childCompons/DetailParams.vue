@@ -26,7 +26,7 @@
       }
     },
     mounted() {
-      console.log(this.params.tables);
+      // console.log(this.params.tables);
     }
   }
 </script>

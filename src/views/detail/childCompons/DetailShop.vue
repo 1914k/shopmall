@@ -42,7 +42,7 @@
     },
     created() {
       setTimeout(() => {
-        console.log(this.shop);
+        // console.log(this.shop);
       },50)
     },
     computed: {

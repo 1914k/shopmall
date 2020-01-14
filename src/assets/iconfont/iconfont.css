@@ -27,31 +27,31 @@
   content: "\e69b";
 }
 
-.icon-nickname:before {
+.icon-woed:before {
   content: "\e6a0";
 }
 
-.icon-icon-test:before {
+.icon-icon-cart:before {
   content: "\e63b";
 }
 
-.icon-icon-test1:before {
+.icon-icon-black-star:before {
   content: "\e657";
 }
 
-.icon-icon-test2:before {
+.icon-arrow-up:before {
   content: "\e658";
 }
 
-.icon-icon-test3:before {
+.icon-arrow-left:before {
   content: "\e659";
 }
 
-.icon-icon-test4:before {
+.icon-arrow-down:before {
   content: "\e65a";
 }
 
-.icon-icon-test5:before {
+.icon-arrow-rigth:before {
   content: "\e65b";
 }
 

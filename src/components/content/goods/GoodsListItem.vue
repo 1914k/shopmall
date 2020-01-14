@@ -4,7 +4,7 @@
       <div class="goods-list-info">
         <p clas="title">{{goodsitem.title}}</p>
         <span class="price">{{goodsitem.price}}</span>
-        <span class="collect">{{goodsitem.star}}</span>
+        <span v-if="goodsitem.star" class="collect">{{goodsitem.star}}</span>
       </div>  
   </div>
 </template>

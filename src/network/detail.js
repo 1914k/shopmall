@@ -69,3 +69,24 @@ export class Params{
     this.disclaimer = itemParams.disclaimer
   }
 }
+
+export class RateInfo{
+  constructor(rateInfo) {
+    this.cRate = rateInfo.cRate;
+    this.imgTotal = rateInfo.imgTotal;
+    this.sales = rateInfo.sales;
+    this.data = rateInfo.data;
+    this.rateTags = [
+      rateInfo.rateTags[0],
+      rateInfo.rateTags[1],
+      rateInfo.rateTags[2],
+      rateInfo.rateTags[3],
+      rateInfo.rateTags[4],
+      rateInfo.rateTags[5],
+    ],
+    this.list = [
+      rateInfo.list[0],
+      rateInfo.list[1]
+    ];
+  }
+}

@@ -39,7 +39,6 @@
     text-align: center;
     height: 45px;
     line-height: 45px;
-    background-color: #fff;
     padding: 0 2px;
   }
   .tab-control-item {

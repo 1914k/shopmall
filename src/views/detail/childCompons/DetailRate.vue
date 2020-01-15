@@ -64,7 +64,6 @@
 
 <style scoped>
   .rate {
-    z-index: 10;
     position: relative;
     padding: 0 13px;
     font-size: 12px;

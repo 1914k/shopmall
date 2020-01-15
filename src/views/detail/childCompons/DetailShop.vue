@@ -77,16 +77,6 @@
     color: var(--color-high-text);
     display: flex;
   }
-  /* .star {
-    display: flex;
-    margin-left: 6px;
-  }
-  .star div {
-    margin-right: 2px;
-  }
-  .star img {
-    width: 12px;
-  } */
   .levelDesc,.saledesc {
     font-size: 12px;
   }

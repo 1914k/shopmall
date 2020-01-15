@@ -43,7 +43,7 @@
       }
     },
     created() {
-      console.log(15093/1000);
+      // console.log(15093/1000);
     },
     computed: {
       getSales() {

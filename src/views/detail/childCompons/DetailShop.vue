@@ -10,9 +10,12 @@
         <div class="name">{{shop.name}}</div>
         <div class="levelDesc">
           <span>{{shop.levelDesc}}</span>
-          <div class="star">
-            <div v-for="i in 5" :key="i"><img :src="shop.star.off" alt=""></div>
-          </div>
+          <!-- <div class="star">
+            <div v-for="i in 5" :key="i" >
+              <img class="show" ref="show" :src="" alt="">
+            </div>
+          </div> -->
+          <star :star="shop.star" :level="shop.level"/>
         </div>
         <div class="saledesc">
           <span>{{shop.saleDesc}}</span>
@@ -30,26 +33,26 @@
 </template>
 
 <script>
+  import Star from 'components/common/star/Star'
   export default{
     name: 'DetailShop',
     props: {
       shop: {}
-    },
-    data(){
-      return {
-        i:1
-      }
     },
     created() {
       setTimeout(() => {
         // console.log(this.shop);
       },50)
     },
-    computed: {
-      getStar(i) {
-        return i <= this.shop.level ? this.shop.star.on :this.shop.star.off;
-      }
+    components: {
+      Star
     }
+    // computed: {
+    //   getStar(a) {
+    //     console.log(document.getElementsByClassName("show"));
+    //     return a <= this.shop.level ? this.shop.star.on :this.shop.star.off;
+    //   }
+    // }
   }
 </script>
 
@@ -74,7 +77,7 @@
     color: var(--color-high-text);
     display: flex;
   }
-  .star {
+  /* .star {
     display: flex;
     margin-left: 6px;
   }
@@ -83,7 +86,7 @@
   }
   .star img {
     width: 12px;
-  }
+  } */
   .levelDesc,.saledesc {
     font-size: 12px;
   }

@@ -34,7 +34,7 @@
         this.scroll.finishPullUp();
       },
       refresh() {
-        this.scroll.refresh();
+        this.scroll.refresh(); 0
       },
       getScrollY() {
         return this.scroll ? this.scroll.y : 0;

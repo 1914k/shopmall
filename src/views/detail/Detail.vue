@@ -1,7 +1,7 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="navbar"/>
-    <scroll class="content">
+    <!-- <scroll class="content"> -->
       <detail-swiper :topImages="topImages"/>
       <detail-goods :goods="goods"/>
       <detail-rate :rate="rate"/>
@@ -11,13 +11,13 @@
       <goods-list class="list" :width= 30 :goods="list">
         <goods-list-item></goods-list-item>
       </goods-list>
-    </scroll>
+    <!-- </scroll> -->
   </div>
 </template>
 
 <script>
   // 公共组件
-  import Scroll from '../../components/common/scroll/Scroll'
+  // import Scroll from '../../components/common/scroll/Scroll'
   import GoodsList from 'components/content/goods/GoodsList'
   import GoodsListItem from 'components/content/goods/GoodsListItem'
   // 子组件
@@ -84,7 +84,7 @@
       DetailSwiper,
       DetailGoods,
       DetailShop,
-      Scroll,
+      // Scroll,
       DetailInfo,
       DetailParams,
       GoodsListItem,
@@ -100,10 +100,11 @@
     background-color: #fff;
     z-index: 9;
     margin-bottom: -49px;
-    height: 100vh;
+    /* height: 100vh; */
   }
   .navbar {
-    position: relative;
+    position: fixed;
+    width: 100%;
     z-index: 10;
     background-color: #fff;
   }

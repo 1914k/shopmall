@@ -23,8 +23,8 @@
     },
 
     mounted() {
-      console.log(this.star);
-      console.log(this.level);
+      // console.log(this.star);
+      // console.log(this.level);
     }
   }
 </script>

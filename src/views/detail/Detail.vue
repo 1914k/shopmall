@@ -1,6 +1,6 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="navbar" @titleClick="titleClick"/>
+    <detail-nav-bar class="navbar" @titleClick="titleClick" :titleH="titleH"/>
     <!-- <scroll class="content"> -->
       <detail-swiper :topImages="topImages"/>
       <detail-goods :goods="goods"/>
@@ -41,7 +41,8 @@
         detailInfo: {},
         params: {},
         list: [],
-        rate: {}
+        rate: {},
+        titleH: []
       }
     },
     created() {
@@ -58,7 +59,7 @@
         // console.log(this.goods);
         // 3. 获取评论
         this.rate = new RateInfo(data.rateInfo);
-        console.log(this.rate);
+        // console.log(this.rate);
         // 4. 获取店铺信息
         this.shop = new ShopInfo(data.shopInfo);
         // console.log(this.shop);
@@ -74,20 +75,17 @@
         
       })
     },
-    mounted() {
-    },
     methods: {  
       titleClick(index) {
-        let titleH = [];
         console.log(index);
-        console.log(this.$refs.rate.$el.offsetTop);
-        console.log(this.$refs.params.$el.offsetTop);
-        console.log(this.$refs.recommend.$el.offsetTop);
-        titleH.push(0);
-        titleH.push(this.$refs.rate.$el.offsetTop);
-        titleH.push(this.$refs.params.$el.offsetTop);
-        titleH.push(this.$refs.recommend.$el.offsetTop);        
-        document.documentElement.scrollTop=titleH[index] - 49;
+        // console.log(this.$refs.rate.$el.offsetTop);
+        // console.log(this.$refs.params.$el.offsetTop);
+        // console.log(this.$refs.recommend.$el.offsetTop);
+        this.titleH.push(0);
+        this.titleH.push(this.$refs.rate.$el.offsetTop - 49);
+        this.titleH.push(this.$refs.params.$el.offsetTop - 49);
+        this.titleH.push(this.$refs.recommend.$el.offsetTop - 49);        
+        document.documentElement.scrollTop=this.titleH[index];
       }
     },
     components: {

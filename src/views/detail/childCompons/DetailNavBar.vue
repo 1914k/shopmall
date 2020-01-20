@@ -19,25 +19,62 @@
 
   export default{
     name: "DetailNavBar",
-    components: {
-      NavBar
+    props: {
+      titleH:{
+        type: Array,
+        default() {
+          return []
+        }
+      }
     },
     data() {
       return {
         titles: ['商品', '评论', '参数', '推荐'],
-        currentIndex: 0
+        currentIndex: 0,
+        scrollTop: {
+          type: Number,
+          default() {
+            return 0
+        }
       }
+      }
+    },
+    mounted() {
+      window.addEventListener('scroll', this.handleScroll)
     },
     methods: {
       itemClick(index) {
         this.currentIndex = index;
         this.$emit('titleClick',index);
+        console.log(this.titleH);
+        
       },
       backClick() {
         this.$router.back();
         // this.$router.go('-1');
+      },
+      handleScroll () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || 
+        document.body.scrollTop;
+        console.log(scrollTop);
+        this.scrollTop = scrollTop;
+        if(scrollTop < this.titleH[1]) {
+          this.currentIndex = 0;
+          } else if(scrollTop < this.titleH[2]) {
+            this.currentIndex = 1;
+            } else if(scrollTop < this.titleH[3]) {
+              this.currentIndex = 2;
+              } else if(scrollTop > this.titleH[3]) {
+                this.currentIndex = 3;
+                }
+        console.log(this.titleH);
+        console.log(this.currentIndex);
+        
       }
-    }
+    },    
+    components: {
+      NavBar
+    },
   }
 </script>
 

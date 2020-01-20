@@ -1,14 +1,14 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="navbar"/>
+    <detail-nav-bar class="navbar" @titleClick="titleClick"/>
     <!-- <scroll class="content"> -->
       <detail-swiper :topImages="topImages"/>
       <detail-goods :goods="goods"/>
-      <detail-rate :rate="rate"/>
+      <detail-rate :rate="rate" ref="rate"/>
       <detail-shop :shop="shop"/>
       <detail-info :detailInfo="detailInfo"/>
-      <detail-params :params="params"/>
-      <goods-list class="list" :width= 30 :goods="list">
+      <detail-params :params="params" ref="params"/>
+      <goods-list class="list" :width= 30 :goods="list" ref="recommend">
         <goods-list-item></goods-list-item>
       </goods-list>
     <!-- </scroll> -->
@@ -76,8 +76,19 @@
     },
     mounted() {
     },
-    methods: {
-     
+    methods: {  
+      titleClick(index) {
+        let titleH = [];
+        console.log(index);
+        console.log(this.$refs.rate.$el.offsetTop);
+        console.log(this.$refs.params.$el.offsetTop);
+        console.log(this.$refs.recommend.$el.offsetTop);
+        titleH.push(0);
+        titleH.push(this.$refs.rate.$el.offsetTop);
+        titleH.push(this.$refs.params.$el.offsetTop);
+        titleH.push(this.$refs.recommend.$el.offsetTop);        
+        document.documentElement.scrollTop=titleH[index] - 49;
+      }
     },
     components: {
       DetailNavBar,

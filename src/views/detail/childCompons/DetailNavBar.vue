@@ -46,8 +46,7 @@
       itemClick(index) {
         this.currentIndex = index;
         this.$emit('titleClick',index);
-        console.log(this.titleH);
-        
+        // console.log(this.titleH);        
       },
       backClick() {
         this.$router.back();
@@ -56,7 +55,7 @@
       handleScroll () {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop || 
         document.body.scrollTop;
-        console.log(scrollTop);
+        // console.log(scrollTop);
         this.scrollTop = scrollTop;
         if(scrollTop < this.titleH[1]) {
           this.currentIndex = 0;
@@ -67,8 +66,8 @@
               } else if(scrollTop > this.titleH[3]) {
                 this.currentIndex = 3;
                 }
-        console.log(this.titleH);
-        console.log(this.currentIndex);
+        // console.log(this.titleH);
+        // console.log(this.currentIndex);
         
       }
     },    

@@ -20,5 +20,6 @@ export default {
 
 <style>
   @import "./assets/css/base.css";
-  @import "./assets/iconfont/iconfont.css"
+  @import "../node_modules/font-awesome/css/font-awesome.min.css";
+  @import "./assets/font_icon/iconfont.css";
 </style> 

@@ -6,12 +6,14 @@
       <detail-goods :goods="goods"/>
       <detail-rate :rate="rate" ref="rate"/>
       <detail-shop :shop="shop"/>
-      <detail-info :detailInfo="detailInfo"/>
+      <detail-info :detailInfo="detailInfo" @infoLoad="infoLoad"/>
       <detail-params :params="params" ref="params"/>
       <goods-list class="list" :width= 30 :goods="list" ref="recommend">
         <goods-list-item></goods-list-item>
       </goods-list>
+      <back-top @click.native="backClick" v-if="isShow"/>
     <!-- </scroll> -->
+    <detail-bottom-bar/>
   </div>
 </template>
 
@@ -20,6 +22,7 @@
   // import Scroll from '../../components/common/scroll/Scroll'
   import GoodsList from 'components/content/goods/GoodsList'
   import GoodsListItem from 'components/content/goods/GoodsListItem'
+  import BackTop from "../../components/content/backTop/BackTop"
   // 子组件
   import DetailNavBar from './childCompons/DetailNavBar'
   import DetailSwiper from './childCompons/DetailSwiper'
@@ -28,8 +31,10 @@
   import DetailInfo from './childCompons/DetailInfo'
   import DetailParams from './childCompons/DetailParams'
   import DetailRate from './childCompons/DetailRate'
+  import DetailBottomBar from './childCompons/DetailBottomBar'
   // 工具类
   import { getDetail, GoodsInfo, ShopInfo, GoodsDetailInfo, Params, RateInfo } from 'network/detail'
+  import { debounce } from '../../common/utils'
   export default{
     name: "Detail",
     data() {
@@ -42,7 +47,8 @@
         params: {},
         list: [],
         rate: {},
-        titleH: []
+        titleH: [],
+        isShow: false
       }
     },
     created() {
@@ -75,17 +81,41 @@
         
       })
     },
+    mounted() {
+      window.addEventListener('scroll', this.handleScroll);
+    },
     methods: {  
       titleClick(index) {
-        console.log(index);
         // console.log(this.$refs.rate.$el.offsetTop);
         // console.log(this.$refs.params.$el.offsetTop);
         // console.log(this.$refs.recommend.$el.offsetTop);
+                
+        document.documentElement.scrollTop=this.titleH[index];
+      },
+      infoLoad() {
+        // console.log('图片加载完成');
+        debounce(this.jiazai, 10)();
+       
+      },
+      jiazai() {
         this.titleH.push(0);
         this.titleH.push(this.$refs.rate.$el.offsetTop - 49);
         this.titleH.push(this.$refs.params.$el.offsetTop - 49);
-        this.titleH.push(this.$refs.recommend.$el.offsetTop - 49);        
-        document.documentElement.scrollTop=this.titleH[index];
+        this.titleH.push(this.$refs.recommend.$el.offsetTop - 49);
+      },
+      backClick() {
+        // console.log("22222222222222");
+        // document.documentElement.scrollTo(0,0);
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      },
+      handleScroll() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || 
+        document.body.scrollTop;
+        // console.log(scrollTop);
+        this.isShow = scrollTop >= this.titleH[1] ? true : false;
       }
     },
     components: {
@@ -98,7 +128,9 @@
       DetailParams,
       GoodsListItem,
       GoodsList,
-      DetailRate
+      DetailRate,
+      DetailBottomBar,
+      BackTop
     }
   }
 </script>
@@ -122,5 +154,6 @@
   }
   .list {
     margin-top: 17px;
+    padding-bottom: 58px;
   }
 </style>

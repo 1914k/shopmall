@@ -25,8 +25,8 @@
     </a>
     <a :href="shop.shopUrl">
       <div class="entry">
-        <span>进店</span>
-        <i class="icon-icon-test5 iconfont"></i>
+        <span>进店 </span>        
+        <i class="fa fa-angle-right"></i>
       </div>
     </a>
   </div>

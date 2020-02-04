@@ -21,7 +21,7 @@
       </li>
       <li v-for="(imgs, index) in item.list" :key="index">
         <div class="item-image">
-          <img :src="imgs" alt="">
+          <img :src="imgs" alt="" @load="infoLoad">
         </div>
       </li>
     </ul>
@@ -43,7 +43,11 @@
     },
     mounted() {
       // console.log(this.detailInfo);
-      
+    },
+    methods: {
+      infoLoad() {
+        this.$emit('infoLoad')
+      }
     },
     components: {
       DetailTabControl

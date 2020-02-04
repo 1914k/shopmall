@@ -13,7 +13,7 @@
       </goods-list>
       <back-top @click.native="backClick" v-if="isShow"/>
     <!-- </scroll> -->
-    <detail-bottom-bar/>
+    <detail-bottom-bar @addCart="addToCart" :product="product"/>
   </div>
 </template>
 
@@ -48,7 +48,8 @@
         list: [],
         rate: {},
         titleH: [],
-        isShow: false
+        isShow: false,
+        product: {}
       }
     },
     created() {
@@ -78,6 +79,16 @@
         // 7. 获取热门推荐
         this.list = data.list;
         // console.log(this.list);
+        //获取购物车需要展示的信息
+
+        const product = {};
+        product.id = this.id;
+        product.img = this.topImages[0];
+        product.title = this.goods.title;
+        product.desc = this.goods.desc;
+        product.price = this.goods.newPrice
+        // console.log(product);
+        this.product = product;
         
       })
     },
@@ -116,6 +127,18 @@
         document.body.scrollTop;
         // console.log(scrollTop);
         this.isShow = scrollTop >= this.titleH[1] ? true : false;
+      },
+      addToCart() {
+        // console.log(this.id);
+        //获取购物车需要展示的信息
+        const product = {};
+        product.id = this.id;
+        product.img = this.topImages[0];
+        product.title = this.goods.title;
+        product.desc = this.goods.desc;
+        product.price = this.goods.newPrice
+        console.log(product);
+        this.product = product;
       }
     },
     components: {

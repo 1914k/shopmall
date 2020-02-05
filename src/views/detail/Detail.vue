@@ -13,7 +13,7 @@
       </goods-list>
       <back-top @click.native="backClick" v-if="isShow"/>
     <!-- </scroll> -->
-    <detail-bottom-bar @addCart="addToCart" :product="product"/>
+    <detail-bottom-bar @addCart="addToCart" :isUp="isShow" :product="product"/>
   </div>
 </template>
 
@@ -130,7 +130,7 @@
       },
       addToCart() {
         // console.log(this.id);
-        //获取购物车需要展示的信息
+        //1. 获取购物车需要展示的信息
         const product = {};
         product.id = this.id;
         product.img = this.topImages[0];
@@ -139,6 +139,11 @@
         product.price = this.goods.newPrice
         console.log(product);
         this.product = product;
+
+        // 2. 将商品添加到购物车里
+        // this.$store.state.cartList.push(product);
+        // 不要直接添加，要通过 vuex里的 mutation 添加
+        this.$store.commit('addCart',product);
       }
     },
     components: {

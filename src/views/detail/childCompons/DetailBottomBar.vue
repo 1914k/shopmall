@@ -18,6 +18,11 @@
       <div class="cart" @click="openCart">加入购物车</div>
       <div class="buy">购买</div>
     </div>
+    <!-- <router-link :to="{path:'/shopcart'}"><div class="toCart" :class="{up: isUp === true}" >购</div></router-link> -->
+    <div @click="toCart" class="toCart" :class="{up: isUp === true}" >购</div>
+    <div class="success" v-show="isSuccess">
+      <div class="success-info">添加购物车成功！</div>
+    </div>
     <div class="product" v-show="isShow">
       <div class="mask"></div>
       <div class="allinfo">
@@ -66,12 +71,19 @@
   export default{
     name: 'DetailBottomBar',
     props: {
-      product: {}
+      product: {},
+      isUp: {
+        type: Boolean,
+        default() {
+          return false
+        }
+      }
     },
     data() {
       return {
         isActive: [false,false,false],
-        isShow: false
+        isShow: false,
+        isSuccess: false
       }
     },
     methods: {
@@ -89,9 +101,16 @@
       addToCart() {
         this.$emit('addCart');
         this.isShow = false;
+        this.isSuccess = true;
+        setTimeout(() => {
+          this.isSuccess = false;
+        }, 1000);
       },
       back() {
         this.isShow = false;
+      },
+      toCart() {
+        this.$router.push({path: '/shopcart'})
       }
     }
   }
@@ -157,6 +176,33 @@
     left: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.4);
+  }
+  .success {
+    position: fixed;
+    text-align: center;
+    padding: 12px 12px 12px 20px;
+    border-radius: 5px;
+    top: calc(50% - 21px);
+    left: calc(50% - 80px);
+    background-color: rgba(0,0,0,0.7);
+    color: #eee;
+  }
+  .toCart {
+    position: fixed;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 50%;
+    bottom: 60px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.4);
+    color: #eee;
+    font-size: 15px;
+    line-height: 30px;
+  }
+  .up {
+    bottom: 105px;
   }
   .allinfo {
     position: absolute;

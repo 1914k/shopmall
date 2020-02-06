@@ -7,7 +7,7 @@
           <img :src="info.img" alt="">
         </div>
         <div class="main-info">
-          <div class="price">0{{info.price}}</div>
+          <div class="price">{{info.price}}</div>
           <div class="title">{{info.title}}</div>
           <div class="desc">{{info.desc}}</div>
         </div>

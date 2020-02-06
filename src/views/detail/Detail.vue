@@ -137,7 +137,7 @@
         product.title = this.goods.title;
         product.desc = this.goods.desc;
         product.price = this.goods.newPrice
-        console.log(product);
+        // console.log(product);
         this.product = product;
 
         // 2. 将商品添加到购物车里

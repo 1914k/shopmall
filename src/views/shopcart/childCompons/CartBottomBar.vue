@@ -10,6 +10,9 @@
        <div @click="pay" class="pay-btn">去结算({{total.count}})</div>
      </div>
     </div>
+    <div class="nocount" v-show="isCount">
+      <div class="nocout-info">{{title}}</div>
+    </div>
   </div>
 </template>
 
@@ -22,6 +25,12 @@
         default() {
           return []
         }
+      }
+    },
+    data() {
+      return {
+        title: "请添加商品！",
+        isCount: false
       }
     },
     computed: {
@@ -53,7 +62,13 @@
         }
       },
       pay() {
-        console.log(this.cartList);
+        if(this.total.count === 0) {
+          this.isCount = true;
+          if(this.cartList.length > 0 )  this.title = "请选择商品！"; 
+          setTimeout(() => {
+            this.isCount = false;
+          }, 1000)
+        }
       }
     }
   }
@@ -115,5 +130,19 @@
     color: #fff;
     padding: 10px 15px;
     border-radius: 19px;
+  }
+  .nocount {
+    position: fixed;
+    text-align: center;
+    line-height: 30px;
+    width: 60vw;
+    height: 40px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    top: 20%;
+    left: calc(50% - 30vw);
+    background-color: rgba(0,0,0,0.7);
+    color: #eee;
   }
 </style>

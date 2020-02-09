@@ -1,20 +1,24 @@
 <template>
   <div class="cart-list">
     <div class="content" v-if="cartList.length > 0">
-      <div v-for="item in cartList" :key="item.id" class="content-item">
+      <div v-for="(item, index) in cartList" :key="item.id" class="content-item">
         <div class="select">
           <div @click="checkClick(item)" class="check" :class="{checkActive: isCheck === item.check}"><i class="fa fa-check check-item" aria-hidden="true"></i></div>
         </div>
-        <div @click="toDetail(item.id)" class="info">
+        <div class="info">
           <div class="img">
             <img :src="item.img" alt="">
           </div>
           <div class="main-info">
-            <div class="title">{{item.title}}</div>
+            <div @click="toDetail(item.id)" class="title">{{item.title}}</div>
             <div class="desc">{{item.desc}}</div> 
             <div class="num">
               <span class="price">￥{{item.price}}</span>
-              <span class="count">x{{item.count}}</span>
+              <div class="count">
+                <span @click="reduce(item,index)" class="btn reduce">-</span>
+                <span class="btn">{{item.count}}</span>
+                <span @click="add(item, index)" class="btn add">+</span>
+              </div>
             </div>
           </div>
         </div>
@@ -25,7 +29,7 @@
 </template>
 
 <script>
-
+import Vue from 'vue'
   export default{
     name: 'CartList',
     data(){
@@ -39,6 +43,20 @@
       },
       toDetail(item) {
         this.$router.push({path: '/detail/' + item})
+      },
+      reduce(item, index) {
+        console.log(this.cartList);
+        let num = item.count--;
+        Vue.set(item, item.count, num);
+        if(item.count === 0) {
+          this.cartList.splice(index, 1);
+          return
+        }      
+      },
+      add(item) {
+        // this.$store.commit('addCount',index)
+        let num = item.count++;
+        Vue.set(item, item.count, num);
       }
     },
     computed: {
@@ -135,5 +153,15 @@
     font-size: 14px;
     bottom: 5px;
     right: 10px;
+  }
+  .btn {
+    padding: 2px 8px;
+    border-collapse: collapse;
+  }
+  .reduce{
+    color: var(--color-high-text)
+  }
+  .add {
+    color: var(--color-high-text)
   }
 </style>

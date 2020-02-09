@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="bar-item bar-right">
-      <div class="cart" @click="openCart">加入购物车</div>
-      <div class="buy">购买</div>
+        <div class="cart right-item" @click="openCart">加入购物车</div>
+        <div class="buy right-item">立即购买</div>
     </div>
     <!-- <router-link :to="{path:'/shopcart'}"><div class="toCart" :class="{up: isUp === true}" >购</div></router-link> -->
     <div @click="toCart" class="toCart" :class="{up: isUp === true}" >购</div>
@@ -59,7 +59,7 @@
             </div>
           </div>
         </div>
-        <div class="buy">
+        <div class="btn-buy">
           <div @click="addToCart" class="btn-sure">确定</div>
         </div>
       </div>
@@ -137,6 +137,7 @@
   }
   .bar-left {
     font-size: 12px;
+    flex: 2;
   }
   .bar-left i {
     display: block;
@@ -144,15 +145,24 @@
     margin-bottom: 5px;
   }
   .bar-right {
+    flex: 3;
     font-size: 14px;
+    justify-content: space-evenly;
   }
-  .cart {
-    width: 100%;
-    line-height: 49px;
+  .right-item {
+    padding: 0 5px;
+    line-height: 36px;
+    border-radius: 18px;
+    color: #fff;
     background-color: yellow;
   }
+  .cart {
+    background-color: #ff3a00;
+  }
   .buy {
-    width: 100%;
+    background-color: var(--color-tint)
+  }
+  .btn-buy {
     line-height: 49px;
     background-color: var(--color-tint);
     color: #fff;

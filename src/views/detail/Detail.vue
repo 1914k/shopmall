@@ -1,6 +1,6 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="navbar" @titleClick="titleClick" :titleH="titleH"/>
+    <detail-nav-bar class="navbar" @scroll.prevent @touchmove.prevent @titleClick="titleClick" :titleH="titleH"/>
     <!-- <scroll class="content"> -->
       <detail-swiper :topImages="topImages"/>
       <detail-goods :goods="goods"/>
@@ -136,7 +136,8 @@
         product.img = this.topImages[0];
         product.title = this.goods.title;
         product.desc = this.goods.desc;
-        product.price = this.goods.newPrice
+        product.price = this.goods.newPrice;
+        product.check = true
         // console.log(product);
         this.product = product;
 

@@ -33,5 +33,6 @@
 <style>
   .detail-swiper {
     height: 300px;
+    padding-top: 44px;
   }
 </style>

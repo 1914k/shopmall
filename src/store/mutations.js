@@ -14,6 +14,7 @@ export default {
     // 判断 oldProduct
     if(oldProduct) {
       oldProduct.count += 1;
+      oldProduct.check = true;
     } else {
       payLoad.count = 1;
       state.cartList.push(payLoad);

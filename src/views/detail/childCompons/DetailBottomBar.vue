@@ -93,7 +93,7 @@
         this.isActive.splice(a,1,this.isActive[a]);
       },
       openCart() {
-        console.log('添加购物车');        
+        // console.log('添加购物车');        
         this.isShow = true;
         // console.log(this.product);
         

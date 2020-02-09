@@ -1,6 +1,5 @@
 <template>
   <div v-if="Object.keys(detailInfo).length !== 0" class="detailInfo">
-    <detail-tab-control :titles="['图文详情','商品参数','热卖推荐']"/>
     <div class="desc">
       <div class="top-line">
         <div class="line"></div>
@@ -29,7 +28,6 @@
 </template>
 
 <script>
-  import DetailTabControl from './DetailTabControl'
 
   export default{
     name: 'DetailInfo',
@@ -48,9 +46,6 @@
       infoLoad() {
         this.$emit('infoLoad')
       }
-    },
-    components: {
-      DetailTabControl
     }
   }
 </script>

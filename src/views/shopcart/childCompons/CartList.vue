@@ -5,7 +5,7 @@
         <div class="select">
           <div @click="checkClick(item)" class="check" :class="{checkActive: isCheck === item.check}"><i class="fa fa-check check-item" aria-hidden="true"></i></div>
         </div>
-        <div class="info">
+        <div @click="toDetail(item.id)" class="info">
           <div class="img">
             <img :src="item.img" alt="">
           </div>
@@ -36,6 +36,9 @@
     methods: {
       checkClick(item) {
         item.check = !item.check;
+      },
+      toDetail(item) {
+        this.$router.push({path: '/detail/' + item})
       }
     },
     computed: {

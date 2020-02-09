@@ -122,12 +122,12 @@
           return
         }
         this.getHomeGoods()
-        console.log(this.goods.pop);
+        // console.log(this.goods.pop);
         // this.$refs.scroll.finishPullUp()
       },
       // 获取 tabOffsetTop 的值的 方法二 监听图片加载完成
       swiperImageLoad() {
-        console.log(this.$refs.tabControl1.$el.offsetTop);
+        // console.log(this.$refs.tabControl1.$el.offsetTop);
         this.tabOffsetTop = this.$refs.tabControl1.$el.offsetTop;
       },
       // 网络请求相关的****************

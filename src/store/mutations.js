@@ -20,5 +20,8 @@ export default {
       state.cartList.push(payLoad);
     }
     // console.log(state.cartList);
-  }
+      let newProduct =  state.cartList.concat();
+      state.cartList = null;
+      state.cartList = newProduct;
+    }
 }

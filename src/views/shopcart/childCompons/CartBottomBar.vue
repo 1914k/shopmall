@@ -2,12 +2,12 @@
   <div class="cart-bottom">
     <div class="content">
       <div class="select">
-        <div @click="checkClick" class="check" :class="{checkActive: isCheck === true}"><i v-if="isCheck" class="fa fa-check check-item" aria-hidden="true"></i></div>
+        <div @click="checkClick" class="check" v-bind:is-check="isAllCheck" :class="{checkActive: isAllCheck === true}"><i v-if="isAllCheck" class="fa fa-check check-item" aria-hidden="true"></i></div>
         <div class="title">全选</div>
      </div>
      <div class="pay">
-       <div class="total">合计：</div>
-       <div @click="pay" class="pay-btn">去结算({{total}})</div>
+       <div class="total">合计：￥{{total.price}}</div>
+       <div @click="pay" class="pay-btn">去结算({{total.count}})</div>
      </div>
     </div>
   </div>
@@ -24,27 +24,32 @@
         }
       }
     },
-    data(){
-      return {
-        isCheck: false
-      }
-    },
     computed: {
       total() {
-        let num = 0;
+        const total = {
+          count: 0,
+          price: 0
+        }
         for(let item of this.cartList){
           if(item.check){
-            num += item.count;
+            total.count += item.count;
+            total.price += item.count * item.price;
           }    
         }
-        return num;
+        total.price = total.price.toFixed(2);
+        return total;
+      },
+      isAllCheck() {
+        if(this.cartList.length === 0) return false;
+        return !this.cartList.find(item => !item.check)
       }
     },
     methods: {
       checkClick() {
-        this.isCheck = !this.isCheck;
-        for(let item of this.cartList) {
-          item.check = this.isCheck;
+        if(this.isAllCheck) {
+          this.cartList.forEach(item => item.check = false);
+        } else {
+          this.cartList.forEach(item => item.check = true); 
         }
       },
       pay() {

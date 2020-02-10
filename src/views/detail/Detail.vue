@@ -144,7 +144,7 @@
         // 2. 将商品添加到购物车里
         // this.$store.state.cartList.push(product);
         // 不要直接添加，要通过 vuex里的 mutation 添加
-        this.$store.commit('addCart',product);
+        this.$store.dispatch('addCart',product);
       }
     },
     components: {

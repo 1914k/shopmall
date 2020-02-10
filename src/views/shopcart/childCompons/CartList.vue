@@ -1,7 +1,8 @@
 <template>
   <div class="cart-list">
+    {{this.cartList}}
     <div class="content" v-if="cartList.length > 0">
-      <div v-for="(item, index) in cartList" :key="item.id" class="content-item">
+      <div v-for="(item) in cartList" :key="item.id" class="content-item">
         <div class="select">
           <div @click="checkClick(item)" class="check" :class="{checkActive: isCheck === item.check}"><i class="fa fa-check check-item" aria-hidden="true"></i></div>
         </div>
@@ -15,9 +16,9 @@
             <div class="num">
               <span class="price">￥{{item.price}}</span>
               <div class="count">
-                <span @click="reduce(item,index)" class="btn reduce">-</span>
+                <span @click="reduce(item)" class="btn reduce">-</span>
                 <span class="btn">{{item.count}}</span>
-                <span @click="add(item, index)" class="btn add">+</span>
+                <span @click="add(item)" class="btn add">+</span>
               </div>
             </div>
           </div>
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+  import {ADD_COUNT} from'../../../store/mutation-types'
   export default{
     name: 'CartList',
     data(){
@@ -44,19 +45,11 @@ import Vue from 'vue'
       toDetail(item) {
         this.$router.push({path: '/detail/' + item})
       },
-      reduce(item, index) {
-        console.log(this.cartList);
-        let num = item.count--;
-        Vue.set(item, item.count, num);
-        if(item.count === 0) {
-          this.cartList.splice(index, 1);
-          return
-        }      
+      reduce(item) {
+       this.$store.dispatch('reduceCount',item)
       },
       add(item) {
-        // this.$store.commit('addCount',index)
-        let num = item.count++;
-        Vue.set(item, item.count, num);
+        this.$store.commit(ADD_COUNT,item);
       }
     },
     computed: {

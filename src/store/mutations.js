@@ -1,27 +1,25 @@
+import {ADD_COUNT, ADD_TO_CART, REDUCE_COUNT, DELETE} from'./mutation-types'
+
 export default {
-  addCart(state, payLoad) {
-    // payLoad 添加商品
-    // let oldProduct = null;
-    // for(let item of state.cartList) {
-    //   if(item.id === payLoad.id) {
-    //     oldProduct = item;
-    //   }
-    // }
+  // mutations 唯一的目的就是修改 state 中的状态
+  // mutations 中的每个方法尽可能完成的事情比较单一
 
-    // 1.查找之前数组中是否含有该商品
-    let oldProduct = state.cartList.find(item => item.id === payLoad.id)
-
-    // 判断 oldProduct
-    if(oldProduct) {
-      oldProduct.count += 1;
-      oldProduct.check = true;
-    } else {
-      payLoad.count = 1;
-      state.cartList.push(payLoad);
-    }
-    // console.log(state.cartList);
-      let newProduct =  state.cartList.concat();
-      state.cartList = null;
-      state.cartList = newProduct;
-    }
+  [ADD_COUNT](state, payLoad) {
+    payLoad.count++;
+    console.log('加', payLoad.count);
+    const num = payLoad.count;
+    delete payLoad.count;
+    console.log(payLoad);
+    payLoad.count = num;
+  },
+  [ADD_TO_CART](state, payLoad) {
+    state.cartList.push(payLoad);
+  },
+  [REDUCE_COUNT](state, payLoad) {
+    payLoad.count -= 1;
+    console.log('减', payLoad.count)
+  },
+  [DELETE](state, payLoad) {
+    state.cartList.splice(state.cartList.indexOf(payLoad), 1)
+  }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-bottom">
+  <div class="cart-bottom" id="contentpay">
     <div class="content">
       <div class="select">
         <div @click="checkClick" class="check" v-bind:is-check="isAllCheck" :class="{checkActive: isAllCheck === true}"><i v-if="isAllCheck" class="fa fa-check check-item" aria-hidden="true"></i></div>
@@ -67,8 +67,11 @@
           if(this.cartList.length > 0 )  this.title = "请选择商品！"; 
           setTimeout(() => {
             this.isCount = false;
-          }, 1000)
+          }, 1000)        
+         
         }
+        // this.$toast.show("哈哈", 2000);
+        console.log(this.$toast);        
       }
     }
   }

@@ -4,7 +4,7 @@ export default {
   addCart(context, payLoad) {
     // 1.查找之前数组中是否含有该商品
     let oldProduct = context.state.cartList.find(item => item.id === payLoad.id)
-
+    
     // 2.判断 oldProduct
     if(oldProduct) {
       context.commit(ADD_COUNT,oldProduct)

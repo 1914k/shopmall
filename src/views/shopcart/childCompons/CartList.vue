@@ -1,6 +1,5 @@
 <template>
   <div class="cart-list">
-    {{this.cartList}}
     <div class="content" v-if="cartList.length > 0">
       <div v-for="(item) in cartList" :key="item.id" class="content-item">
         <div class="select">
@@ -24,7 +23,6 @@
           </div>
         </div>
       </div>
-      <!-- <div v-for="i in 100" :key="i">{{i}}</div> -->
     </div>
   </div>
 </template>

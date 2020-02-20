@@ -1,7 +1,7 @@
 <template>
   <div id="category">
       <div class="wrapper">
-        <ul class="content"><li v-for="item in 100" :key="item">{{item}}</li></ul>
+        <h1>分类</h1>
       </div>
   </div>
 </template>
@@ -25,7 +25,6 @@
 
 <style scoped>
   .wrapper {
-    background-color: #f00;
     height: 100vh;
 
     overflow: hidden;

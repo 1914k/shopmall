@@ -6,18 +6,18 @@ export default {
 
   [ADD_COUNT](state, payLoad) {
     payLoad.count++;
-    console.log('加', payLoad.count);
-    const num = payLoad.count;
-    delete payLoad.count;
-    console.log(payLoad);
-    payLoad.count = num;
+    state.cartList.splice(state.cartList.indexOf(payLoad), 1);
+    state.cartList.push(payLoad);
+    // console.log('加', payLoad.count);
   },
   [ADD_TO_CART](state, payLoad) {
     state.cartList.push(payLoad);
   },
   [REDUCE_COUNT](state, payLoad) {
     payLoad.count -= 1;
-    console.log('减', payLoad.count)
+    state.cartList.splice(state.cartList.indexOf(payLoad), 1);
+    state.cartList.push(payLoad);
+    // console.log('减', payLoad.count)
   },
   [DELETE](state, payLoad) {
     state.cartList.splice(state.cartList.indexOf(payLoad), 1)
